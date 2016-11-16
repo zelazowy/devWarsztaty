@@ -19,8 +19,13 @@ Instrukcja dostępna tu [instalacja Ubuntu](docs/installation_ubuntu.md)
 Instrukcja dostępna tu [instalacja OS X](docs/installation_osx.md)
   
 ## Instalacja środowiska dla Windowsa
+Instrukcja dostępna tu [instalacja Windows](docs/installation_windows.md)
+  
 
 ## Pierwsze uruchomienie projektu 
+Uwaga dla używających Windowsa - większość opisanych tu komend pomija jawne wywoływanie komend przez `php`, w Windowsie 
+niestety to nie przejdzie i komendy muszą się zaczynać od php, np `php bin/composer install` ;P
+
 Aby uruchomić aplikację po raz pierwszy wykonaj następujące kroki:
   1. `$ cd ~/Sites/devWarsztaty`
   2. `$ bin/composer install`
