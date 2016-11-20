@@ -13,7 +13,13 @@
 <nav class="white" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo grey-text text-darken-3">devWarsztaty</a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="#" class="grey-text text-darken-3">Navbar Link</a></li>
+            <li>
+                {% if app.user %}
+                    <a href="{{ path("fos_user_security_logout") }}" class="grey-text text-darken-3">Wyloguj</a>
+                {% else %}
+                    <a href="{{ path("fos_user_security_login") }}" class="grey-text text-darken-3">Zaloguj</a>
+                {% endif %}
+            </li>
         </ul>
 
         <ul id="nav-mobile" class="side-nav">
