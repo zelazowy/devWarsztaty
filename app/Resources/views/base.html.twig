@@ -1,13 +1,50 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>Starter Template - Materialize</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/materialize/dist/css/materialize.min.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+<nav class="white" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo grey-text text-darken-3">devWarsztaty</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="#" class="grey-text text-darken-3">Navbar Link</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+            <li><a href="#" class="grey-text text-darken-3">Navbar Link</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
+
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+<footer class="page-footer blue lighten-1">
+    <div class="footer-copyright">
+        <div class="container">
+            Made by <a class="white-text" href="http://materializecss.com">Materialize</a>
+        </div>
+    </div>
+</footer>
+
+
+<!--  Scripts-->
+<script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/materialize/dist/js/materialize.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/materialize/dist/js/init.js') }}"></script>
+
+{% block javascripts %}
+{% endblock %}
+
+</body>
 </html>
