@@ -1,0 +1,21 @@
+{
+  "name": "devWarsztaty",
+  "homepage": "https://github.com/zelazowy/devWarsztaty",
+  "authors": [
+    "Jonczyk <krzysztof.jonczyk@goldenline.pl>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "materialize": "^0.97.8"
+  }
+}

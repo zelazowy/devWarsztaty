@@ -1,5 +1,3 @@
 app:
-    path: /
-    defaults:
-      _controller: FrameworkBundle:Template:template
-      template: 'workshop/list_anonymous.html.twig'
+    resource: "@AppBundle/Controller/"
+    type:     annotation
