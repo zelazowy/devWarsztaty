@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Workshop;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,20 +13,8 @@ class WorkshopController extends Controller
      */
     public function listAction()
     {
-        $workshops = [
-            [
-                'name'        => 'Podstawy Symfony',
-                'description' => 'Lorem ipsum',
-                'duration'    => '5h',
-                'prelegent'   => 'Bolek i Lolek',
-            ],
-            [
-                'name'        => 'Podstawy JAVY',
-                'description' => 'Dolor sit amet',
-                'duration'    => '2h',
-                'prelegent'   => 'Flip i Flap',
-            ]
-        ];
+        $manager = $this->getDoctrine()->getManager();
+        $workshops = $manager->getRepository("AppBundle:Workshop")->findAll();
 
         return $this->render(':workshop:list_anonymous.html.twig', ['workshops' => $workshops]);
     }
