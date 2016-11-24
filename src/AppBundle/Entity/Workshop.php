@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -49,6 +50,20 @@ class Workshop
      */
     private $speaker;
 
+    /**
+     * @var User[]|ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="workshops")
+     */
+    private $users;
+
+    /**
+     *
+     */
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -154,6 +169,40 @@ class Workshop
     public function getSpeaker()
     {
         return $this->speaker;
+    }
+
+    /**
+     * @return User[]|ArrayCollection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function addUser(User $user)
+    {
+        $this->users->add($user);
+    }
+
+    /**
+     * @param User $user
+     */
+    public function removeUser(User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return bool
+     */
+    public function isMember(User $user)
+    {
+        return $this->users->contains($user);
     }
 }
 

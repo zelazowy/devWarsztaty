@@ -7,29 +7,39 @@
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/materialize/dist/css/materialize.min.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{{ asset('assets/vendor/materialize/dist/css/materialize.min.css') }}" type="text/css" rel="stylesheet"
+          media="screen,projection"/>
 </head>
 <body>
 <nav class="white" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo grey-text text-darken-3">devWarsztaty</a>
+    <div class="nav-wrapper container"><a id="logo-container" href="{{ path("workshop_list") }}" class="brand-logo grey-text text-darken-3">devWarsztaty</a>
         <ul class="right hide-on-med-and-down">
-            <li>
-                {% if app.user %}
+            {% if app.user %}
+                <li>
+                    <a href="{{ path("my_workshops") }}" class="grey-text text-darken-3">Moje warsztaty</a>
+                </li>
+                <li>
                     <a href="{{ path("fos_user_security_logout") }}" class="grey-text text-darken-3">Wyloguj</a>
-                {% else %}
+                </li>
+            {% else %}
+                <li>
                     <a href="{{ path("fos_user_security_login") }}" class="grey-text text-darken-3">Zaloguj</a>
-                {% endif %}
-            </li>
+                </li>
+            {% endif %}
         </ul>
 
-        <ul id="nav-mobile" class="side-nav">
-            <li><a href="#" class="grey-text text-darken-3">Navbar Link</a></li>
-        </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
 </nav>
 
 <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                <h4 class="green-text darken-3">{{ flashMessage }}</h4>
+            </div>
+        {% endfor %}
+    </div>
+
     <div class="container">
         {% block content %}{% endblock %}
     </div>
