@@ -4,8 +4,10 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Entity\Workshop;
+use AppBundle\Form\Type\WorkshopType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class WorkshopController extends Controller
@@ -81,5 +83,38 @@ class WorkshopController extends Controller
         $workshops = $user->getWorkshops();
 
         return $this->render(':workshop:list_my.html.twig', ['workshops' => $workshops]);
+    }
+
+    /**
+     * @Route("/add-workshop", name="add_workshop")
+     */
+    public function addWorkshopAction(Request $request)
+    {
+        $this->denyAccessUnlessGranted("ROLE_USER");
+
+        $workshop = new Workshop();
+        $form = $this->createForm(WorkshopType::class, $workshop);
+
+        if ($request->isMethod(Request::METHOD_POST)) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                /** @var User $user */
+                $user = $this->getUser();
+                $workshop->setSpeaker($user->getUsername());
+                $user->addWorkshop($workshop);
+
+                $manager = $this->getDoctrine()->getManager();
+                $manager->persist($workshop);
+                $manager->persist($user);
+                $manager->flush();
+
+                $this->addFlash("success", sprintf('Dodałeś nowe warsztaty "%s"', $workshop->getName()));
+
+                return $this->redirectToRoute("workshop_list");
+            }
+        }
+
+        return $this->render(":workshop:add.html.twig", ["form" => $form->createView()]);
     }
 }

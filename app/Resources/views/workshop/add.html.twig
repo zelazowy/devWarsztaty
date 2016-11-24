@@ -1,0 +1,9 @@
+{% extends "::base.html.twig" %}
+
+{% block content %}
+    <form action="{{ path("add_workshop") }}" method="post">
+        {{ form_rest(form) }}
+
+        <button type="submit" class="secondary-content waves-effect waves-light btn">Dodaj</button>
+    </form>
+{% endblock %}
