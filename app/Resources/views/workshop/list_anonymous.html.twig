@@ -14,8 +14,10 @@
                 <p>Prowadzący: {{ workshop.speaker }} <br>
                     {{ workshop.description }}
                 </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                {% block buttons %}{% endblock %}
             </li>
+        {% else %}
+            <li class="collection-item"><h3>Brak dostępnych warsztatów</h3></li>
         {% endfor %}
     </ul>
 {% endblock %}

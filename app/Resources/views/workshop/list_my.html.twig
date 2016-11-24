@@ -1,0 +1,7 @@
+{% extends ":workshop:list_anonymous.html.twig" %}
+
+{% block buttons %}
+    <form action="{{ path("workshop_unenrol", { "id": workshop.id }) }}" method="post">
+        <button type="submit" class="secondary-content waves-effect waves-light btn blue">Wypisz się</button>
+    </form>
+{% endblock %}

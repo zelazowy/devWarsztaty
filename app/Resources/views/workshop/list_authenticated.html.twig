@@ -1,0 +1,13 @@
+{% extends ":workshop:list_anonymous.html.twig" %}
+
+{% block buttons %}
+    {% if not workshop.isMember(app.user) %}
+        <form action="{{ path("workshop_enrol", { "id": workshop.id }) }}" method="post">
+            <button type="submit" class="secondary-content waves-effect waves-light btn">Zapisz się</button>
+        </form>
+    {% else %}
+        <form action="{{ path("workshop_unenrol", { "id": workshop.id }) }}" method="post">
+            <button type="submit" class="secondary-content waves-effect waves-light btn blue">Wypisz się</button>
+        </form>
+    {% endif %}
+{% endblock %}
