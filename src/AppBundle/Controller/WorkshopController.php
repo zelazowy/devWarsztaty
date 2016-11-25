@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Entity\Workshop;
+use AppBundle\EventDispatcher\Events;
+use AppBundle\EventDispatcher\WorkshopEvent;
 use AppBundle\Form\Type\WorkshopType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -17,7 +19,7 @@ class WorkshopController extends Controller
      */
     public function listAction()
     {
-        $manager = $this->getDoctrine()->getManager();
+        $manager   = $this->getDoctrine()->getManager();
         $workshops = $manager->getRepository("AppBundle:Workshop")->findAll();
 
         if (false === $this->getUser() instanceof User) {
@@ -79,7 +81,7 @@ class WorkshopController extends Controller
         $this->denyAccessUnlessGranted("ROLE_USER");
 
         /** @var User $user */
-        $user = $this->getUser();
+        $user      = $this->getUser();
         $workshops = $user->getWorkshops();
 
         return $this->render(':workshop:list_my.html.twig', ['workshops' => $workshops]);
@@ -93,7 +95,7 @@ class WorkshopController extends Controller
         $this->denyAccessUnlessGranted("ROLE_USER");
 
         $workshop = new Workshop();
-        $form = $this->createForm(WorkshopType::class, $workshop);
+        $form     = $this->createForm(WorkshopType::class, $workshop);
 
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
@@ -108,6 +110,8 @@ class WorkshopController extends Controller
                 $manager->persist($workshop);
                 $manager->persist($user);
                 $manager->flush();
+
+                $this->get('event_dispatcher')->dispatch(Events::WORKSHOP_ADD, new WorkshopEvent($workshop, $user));
 
                 $this->addFlash("success", sprintf('Dodałeś nowe warsztaty "%s"', $workshop->getName()));
 
