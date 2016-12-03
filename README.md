@@ -30,7 +30,9 @@ Aby uruchomić aplikację po raz pierwszy wykonaj następujące kroki:
   1. `$ cd ~/Sites/devWarsztaty`
   2. `$ bin/composer install`
   3. pozostaw domyślne wartości parametrów proponowane przez composera
-  4. `$ bin/console server:run`
-  5. wejdź na wyświetlony przez konsolę adres (zazwyczaj http://127.0.0.1:8000)
-  6. powinna ukazać się strona potwierdzająca prawidłowe uruchomienie Symfony
+  4. możesz dodać nowego użytkownika uruchamiając komendę `$ bin/console fos:user:create`
+  5. uruchom serwer wbudowany`$ bin/console server:run`
+  6. wejdź na wyświetlony przez konsolę adres (domyślnie http://127.0.0.1:8000)
+  7. pokaże się strona z listą warsztatów, wszystkie linki są aktywne więc można zacząć zabawę :)
+  8. powodzenia!
   
